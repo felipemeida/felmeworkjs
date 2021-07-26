@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-(async () => {
+async function startSistemaFederal() {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 })
@@ -52,4 +52,6 @@ const puppeteer = require('puppeteer');
     await page.waitForTimeout(1000);
     await page.click('.card_enable .disparar-pixel-pagamento');
 
-})();
+}
+
+module.exports = { startSistemaFederal };

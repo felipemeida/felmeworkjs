@@ -33,7 +33,6 @@ async function secondStage(page) {
     await page.type('#mat-input-4', '10939779064');
     await page.type('#mat-input-5', 'Gleice de Oliveira');
     await page.type('#mat-input-6', 'Djalma dos Santos');
-    // await page.click('.align-items-center .mat-flat-button');
     await nextStageOnForm(page, 2)
 }
 
@@ -43,12 +42,13 @@ async function thirdStage(page) {
 }
 
 async function fillCertificate(page){
-    await page.goto('https://buscatestamento.org.br/private/orders/new');
-    await page.waitForNavigation();
-    await page.waitForTimeout(1500);
-    await page.click('#mat-checkbox-1');
-    await page.waitForTimeout(500);
-    await page.click('button[type="submit"]');
+    // await page.goto('https://buscatestamento.org.br/private/orders/new');
+    // await page.waitForNavigation();
+    // await page.waitForTimeout(1500);
+    // await page.click('#mat-checkbox-1');
+    // await page.waitForTimeout(500);
+    // await page.click('button[type="submit"]');
+    // await page.waitForTimeout(100);
 
     await page.goto('https://buscatestamento.org.br/private/orders/new/request');
     await page.waitForNavigation();
@@ -58,11 +58,14 @@ async function fillCertificate(page){
     await thirdStage(page);
 }
 
-(async () => {
+async function start() {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 700 })
     await login(page);
     await fillCertificate(page);
-    //await browser.close();
-})();
+    await page.waitForTimeout(5000);
+    await browser.close();
+}
+
+module.exports = { start };
