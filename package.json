@@ -2,18 +2,24 @@
   "name": "crawler",
   "version": "1.0.0",
   "description": "",
-  "main": "tests/index.js",
+  "main": "examples/index.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "export NODE_ENV=development; nodemon server.js",
+    "server-prod": "export NODE_ENV=production; nodemon server.js",
+    "test": "jest"
   },
-  "author": "",
+  "author": "Felipe de Almeida",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
+    "config": "^3.3.6",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "puppeteer": "^10.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "prettier": "2.3.2"
   }
 }

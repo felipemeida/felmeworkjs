@@ -1,8 +1,11 @@
 const express = require('express')
-var path = require('path');
+const path = require('path');
+const config = require('config');
 const app = express()
+const routes = require('./routes/routes.js');
 
-const port = 3000
+const port = config.get('server.port');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -22,4 +25,4 @@ app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 })
 
-app.use(require('./routes'));
+app.use(routes);
