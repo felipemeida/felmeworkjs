@@ -10,7 +10,7 @@ module.exports.fillCertificate = async function (req, res) {
 
 module.exports.fillTestamento = async function (req, res) {
     const certificates = new Certificates();
-    const dataCertificate = await certificates.getById(10371);
+    const dataCertificate = await certificates.getById(req.params.id);
     const testamento = new Testamento();
     await testamento.start(dataCertificate.data.datas);
     res.send('Enviado!');
