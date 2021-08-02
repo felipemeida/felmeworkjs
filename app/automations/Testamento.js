@@ -24,9 +24,11 @@ class Testamento {
 
     async firstStage() {
         // field data óbito
+        await this.page.waitFor('#mat-input-8');
         await this.page.type('#mat-input-8', this.form.data_obito);
         await this.page.click('#mat-select-0');
         await this.page.waitForTimeout(300);
+        await this.page.waitFor('.mat-option-text');
         const regions = await this.page.$$('.mat-option-text');
         // position of uf in number to select
         await regions[ufToOrderNumber(this.form.uf)].click();
@@ -36,6 +38,7 @@ class Testamento {
     }
 
     async secondStage() {
+        await this.page.waitFor('#mat-input-0');
         await this.page.type('#mat-input-0', this.form.nome_falecido);
         await this.page.type('#mat-input-1', this.form.data_nascimento);
         await this.page.type('#mat-input-2', this.form.registro_geral);
@@ -47,7 +50,7 @@ class Testamento {
     }
 
     async thirdStage() {
-        // field data matricula
+        await this.page.waitFor('#mat-input-9');
         await this.page.type('#mat-input-9', this.form.matricula_obito);
         await this.page.click('button[class="col-md-2 mat-flat-button mat-primary"]');
     }

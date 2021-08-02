@@ -10,7 +10,7 @@ module.exports.fillCertificate = async function (req, res) {
 
 module.exports.fillTestamento = async function (req, res) {
     const certificates = new Certificates();
-    const dataCertificate = await certificates.getById();
+    const dataCertificate = await certificates.getById(10371);
     const testamento = new Testamento();
     await testamento.start(dataCertificate.data.datas);
     res.send('Enviado!');
@@ -18,6 +18,6 @@ module.exports.fillTestamento = async function (req, res) {
 
 module.exports.getCertificate = async function (req, res) {
     const certificates = new Certificates();
-    const data = await certificates.getById();
+    const data = await certificates.getById(10371);
     res.send(data);
 }

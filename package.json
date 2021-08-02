@@ -4,7 +4,7 @@
   "description": "",
   "main": "examples/index.js",
   "scripts": {
-    "server": "export NODE_ENV=development; nodemon server.js",
+    "server": "export NODE_ENV=test; nodemon server.js",
     "server-prod": "export NODE_ENV=production; nodemon server.js",
     "test": "jest"
   },
