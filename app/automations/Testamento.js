@@ -20,18 +20,17 @@ class Testamento {
         await this.page.type('#Password', '951753Pa11!');
         await this.page.click('.top-space-md .btn-accent');
         await this.page.waitForNavigation();
+        await this.page.waitForTimeout(2000);
     }
 
     async firstStage() {
         // field data óbito
-        await this.page.waitForTimeout(300);
         await this.page.waitFor('#mat-input-8');
         await this.page.type('#mat-input-8', this.form.data_obito);
         await this.page.click('#mat-select-0');
-        await this.page.waitForTimeout(300);
+        await this.page.waitForTimeout(200);
         await this.page.waitFor('.mat-option-text');
         const regions = await this.page.$$('.mat-option-text');
-        // position of uf in number to select
         await regions[ufToOrderNumber(this.form.uf)].click();
         await this.nextStageOnForm(1)
         await this.page.click('button[mat-dialog-close]');
@@ -67,7 +66,7 @@ class Testamento {
 
         await this.page.goto('https://buscatestamento.org.br/private/orders/new/request');
         await this.page.waitForNavigation();
-        await this.page.waitForTimeout(1500);
+        await this.page.waitForTimeout(2000);
         await this.firstStage();
         await this.secondStage();
         await this.thirdStage();
@@ -80,7 +79,7 @@ class Testamento {
         await this.page.setViewport({ width: 1280, height: 700 })
         await this.login();
         await this.fillCertificate();
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(3500);
         //await browser.close();
     }
 
@@ -92,7 +91,7 @@ class Testamento {
         this.form.registro_geral  = findBySlug(dataCertificate, 'registro-geral');
         this.form.orgao_emissor  = findBySlug(dataCertificate, 'orgao-emissor');
         this.form.cpf_falecido  = findBySlug(dataCertificate, 'cpf-falecido');
-        this.form.uf  = findBySlug(dataCertificate, 'uf');
+        this.form.uf  = findBySlug(dataCertificate, 'estado-obito');
         this.form.matricula_obito  = findBySlug(dataCertificate, 'matricula-obito');
         this.form.data_nascimento  = findBySlug(dataCertificate, 'data-nascimento');
     }
