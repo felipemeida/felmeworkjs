@@ -20,7 +20,7 @@ class Testamento {
         await this.page.type('#Password', '951753Pa11!');
         await this.page.click('.top-space-md .btn-accent');
         await this.page.waitForNavigation();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(4000);
     }
 
     async firstStage() {
