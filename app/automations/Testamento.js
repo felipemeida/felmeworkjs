@@ -24,6 +24,7 @@ class Testamento {
 
     async firstStage() {
         // field data óbito
+        await this.page.waitForTimeout(300);
         await this.page.waitFor('#mat-input-8');
         await this.page.type('#mat-input-8', this.form.data_obito);
         await this.page.click('#mat-select-0');
