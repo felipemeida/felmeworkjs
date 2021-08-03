@@ -74,7 +74,7 @@ class Testamento {
 
     async start(dataCertificate) {
         this.processDataTestamento(dataCertificate)
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch({ headless: false, slowMo: 10 });
         this.page = await browser.newPage();
         await this.page.setViewport({ width: 1280, height: 700 })
         await this.login();
