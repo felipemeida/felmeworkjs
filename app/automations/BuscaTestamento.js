@@ -4,6 +4,7 @@ const Automation = require("./Automation");
 const {uploadPath} = require("../helpers/storage");
 const fs = require('fs');
 const clipboardy = require("clipboardy");
+const path = require("path");
 
 class Testamento extends Automation{
     async nextStageOnForm(count){
@@ -83,6 +84,9 @@ class Testamento extends Automation{
         await this.page.keyboard.down('Control')
         await this.page.keyboard.press('V')
         await this.page.keyboard.up('Control')
+
+        fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_certidao))
+        fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_documento))
 
         await this.page.waitForTimeout(this.time(1500));
         await this.page.waitForSelector('#cdk-step-content-1-0 button[class="mat-flat-button mat-primary"]');
