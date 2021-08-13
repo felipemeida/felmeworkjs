@@ -6,5 +6,9 @@
     "baseUrl": "https://painel.sistemafederal.com.br",
     "user": "api@sistemafederal.com.br",
     "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
+  },
+  "performance": {
+    "multiplierTime": 1,
+    "steps": 10
   }
 }

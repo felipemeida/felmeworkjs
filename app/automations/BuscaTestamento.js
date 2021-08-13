@@ -3,6 +3,7 @@ const {findBySlug} = require("../helpers/certificateHelper");
 const Automation = require("./Automation");
 const {uploadPath} = require("../helpers/storage");
 const fs = require('fs');
+const clipboardy = require("clipboardy");
 
 class Testamento extends Automation{
     async nextStageOnForm(count){
@@ -74,10 +75,19 @@ class Testamento extends Automation{
     }
 
     async paymentStage() {
+        await clipboardy.write('foo')
+
+        const input= await this.page.$('h1 .ng-star-inserted')
+        await input.focus()
+
+        await this.page.keyboard.down('Control')
+        await this.page.keyboard.press('V')
+        await this.page.keyboard.up('Control')
+
         await this.page.waitForTimeout(this.time(1500));
         await this.page.waitForSelector('#cdk-step-content-1-0 button[class="mat-flat-button mat-primary"]');
         await this.page.click('#cdk-step-content-1-0 button[class="mat-flat-button mat-primary"]');
-        await this.page.waitForTimeout(this.time(100));
+        await this.page.waitForTimeout(this.time(300));
         await this.page.click('#cdk-step-content-1-1 button[class="mat-flat-button mat-primary"]');
         await this.page.waitForSelector('[class="mat-flat-button mat-primary ng-star-inserted"]');
         await this.page.click('[class="mat-flat-button mat-primary ng-star-inserted"]');
@@ -91,7 +101,7 @@ class Testamento extends Automation{
         // await this.page.click('iron-icon');
         //await this.page.goto('http://www.risel.com.br');
         // {waitUntil: 'networkidle0'}
-        //await this.page.waitForTimeout(this.time(5000));
+        // await this.page.waitForTimeout(this.time(5000));
         // const pdf = await this.page.pdf({ format: 'A4'});
         // console.log(pdf);
         // fs.writeFileSync('some.pdf', pdf)
@@ -99,7 +109,7 @@ class Testamento extends Automation{
         //await this.page.screenshot({path: 'example.png'});
     }
 
-    async fillCertificate(){
+    async automation(){
 
         this.processDataTestamento(this.dataCertificate);
         await this.login();
@@ -135,8 +145,10 @@ class Testamento extends Automation{
         this.form.data_nascimento  = findBySlug(dataCertificate, 'data-nascimento');
 
         //need get in backend
-        this.form.link_documento  = 'documento.pdf';
-        this.form.link_certidao  = 'obito.pdf';
+        this.form.link_documento  = '2.pdf';
+        // this.form.link_documento_alternative  = '2a.pdf';
+        this.form.link_certidao  = '1.pdf';
+        // this.form.link_certidao_alternative  = '1a.pdf';
     }
 }
 module.exports = Testamento;

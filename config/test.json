@@ -6,5 +6,12 @@
     "baseUrl": "https://testepainel.cartoriofederal.com",
     "user": "api@sistemafederal.com.br",
     "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
+  },
+  "storage": {
+    "download": "/Users/felipemeida/downloads"
+  },
+  "performance": {
+    "multiplierTime": 0.8,
+    "steps": 0
   }
 }

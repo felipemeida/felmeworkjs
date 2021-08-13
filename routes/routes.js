@@ -1,12 +1,19 @@
 const router = require('express').Router();
 
 const homeController = require("../app/controllers/homeController");
-const automationsController = require("../app/controllers/automationsController");
+const sistemaFederalAutomationController = require("../app/controllers/sistemaFederalAutomationsController");
+const testamentoAutomationController = require("../app/controllers/testamentoAutomationController");
+const testsController = require("../app/controllers/testsController");
 
-router.use('/certificate-system', automationsController.fillCertificate);
-router.use('/testamento/:id', automationsController.fillTestamento);
-router.use('/testamento', automationsController.fillTestamentoGet);
-router.use('/certificate', automationsController.getCertificate);
+router.use('/certificate-system', sistemaFederalAutomationController.fillCertificate);
+router.use('/testamento/:id', testamentoAutomationController.fillTestamento);
+router.use('/testamento', testamentoAutomationController.fillTestamentoGet);
+router.use('/certificate', testamentoAutomationController.getCertificate);
+
+router.use('/form', testsController.form);
+router.use('/login-gmail', testsController.gmail);
+
+/* ROOT */
 router.use('/', homeController.index);
 
 module.exports = router;
