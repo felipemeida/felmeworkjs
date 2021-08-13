@@ -78,12 +78,24 @@ class Testamento extends Automation{
     async paymentStage() {
         await clipboardy.write('foo')
 
-        const input= await this.page.$('h1 .ng-star-inserted')
-        await input.focus()
+        const texts = await this.page.$('h1.component-title .ng-star-inserted')
+        // await input.focus()
+        //
+        // await this.page.keyboard.down('Control')
+        // await this.page.keyboard.press('V')
+        // await this.page.keyboard.up('Control')
 
-        await this.page.keyboard.down('Control')
-        await this.page.keyboard.press('V')
-        await this.page.keyboard.up('Control')
+        await this.page.evaluate(() => {
+            function copy(texts) {
+                let input = document.createElement('input');
+                input.setAttribute('value', texts[1].innerText);
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input)
+            }
+            return copy(document.body.innerHTML); // copy whatever want to copy
+        });
 
         fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_certidao))
         fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_documento))
