@@ -1,10 +1,8 @@
 const {ufToOrderNumber} = require("../helpers/ufHelper");
 const {findBySlug} = require("../helpers/certificateHelper");
 const Automation = require("./Automation");
-const {uploadPath} = require("../helpers/storage");
-const fs = require('fs');
-const clipboardy = require("clipboardy");
-const path = require("path");
+const {uploadPath, eraseUploadFolder, filesInUploadFolder} = require("../helpers/storage");
+const {selectorToClipboard} = require("../helpers/copyToClipboard");
 
 class Testamento extends Automation{
     async nextStageOnForm(count){
@@ -55,10 +53,10 @@ class Testamento extends Automation{
         await this.page.click('button[class="col-md-2 mat-flat-button mat-primary"]');
         const elementsHandle = await this.page.$$("input[type=file]");
         await elementsHandle[0].uploadFile(uploadPath(this.form.link_certidao));
-        await this.page.waitForTimeout(this.time(3000));
+        await this.page.waitForTimeout(this.time(3500));
         await this.nextStageOnForm(3);
         await elementsHandle[1].uploadFile(uploadPath(this.form.link_documento));
-        await this.page.waitForTimeout(this.time(3000));
+        await this.page.waitForTimeout(this.time(3500));
         await this.nextStageOnForm(4);
     }
 
@@ -68,7 +66,7 @@ class Testamento extends Automation{
         await this.nextStageOnForm(5);
         //await this.nextStageOnForm(6);
         await this.page.click('[class="d-flex justify-content-center align-items-center mt-4 ng-star-inserted"] [class="mat-flat-button mat-primary"]');
-        await this.page.waitForTimeout(this.time(500));
+        await this.page.waitForTimeout(this.time(600));
         await this.page.waitForSelector('#mat-checkbox-5-input');
         await this.page.click('[for="mat-checkbox-5-input"]');
         await this.page.type('#mat-input-15', 'SISTEMA FEDERAL');
@@ -76,34 +74,16 @@ class Testamento extends Automation{
     }
 
     async paymentStage() {
-        await clipboardy.write('foo')
-
-        const texts = await this.page.$('h1.component-title .ng-star-inserted')
-        // await input.focus()
-        //
-        // await this.page.keyboard.down('Control')
-        // await this.page.keyboard.press('V')
-        // await this.page.keyboard.up('Control')
-
-        await this.page.evaluate(() => {
-            function copy(texts) {
-                let input = document.createElement('input');
-                input.setAttribute('value', texts[1].innerText);
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input)
-            }
-            return copy(document.body.innerHTML); // copy whatever want to copy
-        });
-
-        fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_certidao))
-        fs.unlinkSync(path.join(__dirname, '../../storage/upload/' + this.form.link_documento))
-
+        await eraseUploadFolder();
         await this.page.waitForTimeout(this.time(1500));
+
         await this.page.waitForSelector('#cdk-step-content-1-0 button[class="mat-flat-button mat-primary"]');
+
         await this.page.click('#cdk-step-content-1-0 button[class="mat-flat-button mat-primary"]');
-        await this.page.waitForTimeout(this.time(300));
+        await this.page.waitForTimeout(this.time(500));
+
+        await selectorToClipboard(this.page, 'app-payment spa-box div.box-light h1.component-title span.ng-star-inserted');
+
         await this.page.click('#cdk-step-content-1-1 button[class="mat-flat-button mat-primary"]');
         await this.page.waitForSelector('[class="mat-flat-button mat-primary ng-star-inserted"]');
         await this.page.click('[class="mat-flat-button mat-primary ng-star-inserted"]');
@@ -127,16 +107,16 @@ class Testamento extends Automation{
 
     async automation(){
 
-        this.processDataTestamento(this.dataCertificate);
+        await this.processDataTestamento(this.dataCertificate);
         await this.login();
 
-        await this.page.goto('https://buscatestamento.org.br/private/orders/new');
-        await this.page.waitForNavigation();
-        await this.page.waitForTimeout(1500);
-        await this.page.click('#mat-checkbox-1');
-        await this.page.waitForTimeout(500);
-        await this.page.click('button[type="submit"]');
-        await this.page.waitForTimeout(100);
+        // await this.page.goto('https://buscatestamento.org.br/private/orders/new');
+        // await this.page.waitForNavigation();
+        // await this.page.waitForTimeout(1500);
+        // await this.page.click('#mat-checkbox-1');
+        // await this.page.waitForTimeout(500);
+        // await this.page.click('button[type="submit"]');
+        // await this.page.waitForTimeout(100);
 
         await this.page.goto('https://buscatestamento.org.br/private/orders/new/request');
         await this.page.waitForNavigation();
@@ -148,7 +128,7 @@ class Testamento extends Automation{
         await this.paymentStage();
     }
 
-    processDataTestamento(dataCertificate) {
+    async processDataTestamento(dataCertificate) {
         this.form.nome_falecido  = findBySlug(dataCertificate, 'nome-falecido');
         this.form.data_obito  = findBySlug(dataCertificate, 'data-obito');
         this.form.nome_mae  = findBySlug(dataCertificate, 'nome-mae');
@@ -161,10 +141,9 @@ class Testamento extends Automation{
         this.form.data_nascimento  = findBySlug(dataCertificate, 'data-nascimento');
 
         //need get in backend
-        this.form.link_documento  = '2.pdf';
-        // this.form.link_documento_alternative  = '2a.pdf';
-        this.form.link_certidao  = '1.pdf';
-        // this.form.link_certidao_alternative  = '1a.pdf';
+        const files = await filesInUploadFolder();
+        this.form.link_certidao  = files[0];
+        this.form.link_documento  = files[1];
     }
 }
 module.exports = Testamento;

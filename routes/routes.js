@@ -10,6 +10,7 @@ router.use('/testamento/:id', testamentoAutomationController.fillTestamento);
 router.use('/testamento', testamentoAutomationController.fillTestamentoGet);
 router.use('/certificate', testamentoAutomationController.getCertificate);
 
+router.use('/testes', testsController.test);
 router.use('/form', testsController.form);
 router.use('/login-gmail', testsController.gmail);
 

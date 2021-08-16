@@ -1,14 +1,14 @@
 const Automation = require("./Automation");
 
-class Gmail extends Automation{
-    async automation (){
+class Gmail extends Automation {
+    async automation() {
         await this.login();
         await this.page.goto('https://buscatestamento.org.br/private/orders/decda115-a035-4459-a906-4c0a895cab3f');
         await this.page.waitForTimeout(this.time(3000));
         await this.page.click('.px-4 [class="mat-flat-button mat-primary ng-star-inserted"]');
     }
 
-    async login(){
+    async login() {
         await this.page.goto('https://e-notariado.grantid.e-notariado.org.br/Account/Login?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Did_token%2520token%26client_id%3Dbuscatestamento%26state%3DAUU7YdYCW2WpXVwWFvS1wnAEaim4kxh2n5CqyLmS;eyJyZXR1cm5VcmwiOm51bGx9%26redirect_uri%3Dhttps%253A%252F%252Fbuscatestamento.org.br%26scope%3Dopenid%2520profile%2520cpf%2520buscatestamento%26nonce%3DAUU7YdYCW2WpXVwWFvS1wnAEaim4kxh2n5CqyLmS');
         await this.page.type('#Username', '04773145110');
         await this.page.type('#Password', '951753Pa11!');
@@ -28,4 +28,5 @@ class Gmail extends Automation{
     //     await this.end();
     // }
 }
+
 module.exports = Gmail;
