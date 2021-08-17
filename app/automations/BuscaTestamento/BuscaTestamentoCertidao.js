@@ -1,23 +1,14 @@
-const {ufToOrderNumber} = require("../helpers/ufHelper");
-const {findBySlug} = require("../helpers/certificateHelper");
-const Automation = require("./Automation");
-const {uploadPath, eraseUploadFolder, filesInUploadFolder} = require("../helpers/storage");
-const {selectorToClipboard} = require("../helpers/copyToClipboard");
+const {ufToOrderNumber} = require("../../helpers/ufHelper");
+const {findBySlug} = require("../../helpers/certificateHelper");
+const {uploadPath, eraseUploadFolder, filesInUploadFolder} = require("../../helpers/storage");
+const {selectorToClipboard} = require("../../helpers/copyToClipboard");
+const BuscaTestamento = require("./BuscaTestamento");
 
-class Testamento extends Automation{
+class Testamento extends BuscaTestamento{
     async nextStageOnForm(count){
         const regions = await this.page.$$('.align-items-center [class="mr-3 mat-flat-button mat-primary"]');
         await regions[count - 1].click();
         await this.page.waitForTimeout(this.time(500));
-    }
-
-    async login(){
-        await this.page.goto('https://e-notariado.grantid.e-notariado.org.br/Account/Login?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Did_token%2520token%26client_id%3Dbuscatestamento%26state%3DAUU7YdYCW2WpXVwWFvS1wnAEaim4kxh2n5CqyLmS;eyJyZXR1cm5VcmwiOm51bGx9%26redirect_uri%3Dhttps%253A%252F%252Fbuscatestamento.org.br%26scope%3Dopenid%2520profile%2520cpf%2520buscatestamento%26nonce%3DAUU7YdYCW2WpXVwWFvS1wnAEaim4kxh2n5CqyLmS');
-        await this.page.type('#Username', '04773145110');
-        await this.page.type('#Password', '951753Pa11!');
-        await this.page.click('.top-space-md .btn-accent');
-        await this.page.waitForNavigation();
-        await this.page.waitForTimeout(this.time(4000));
     }
 
     async firstStage() {

@@ -8,6 +8,7 @@ const testsController = require("../app/controllers/testsController");
 router.use('/certificate-system', sistemaFederalAutomationController.fillCertificate);
 router.use('/testamento/:id', testamentoAutomationController.fillTestamento);
 router.use('/testamento', testamentoAutomationController.fillTestamentoGet);
+router.use('/acompanhamento/:id', testamentoAutomationController.monitoringCertificate);
 router.use('/certificate', testamentoAutomationController.getCertificate);
 
 router.use('/testes', testsController.test);
