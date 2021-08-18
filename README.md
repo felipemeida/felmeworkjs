@@ -23,3 +23,8 @@
 
 ### Rodar os testes
 - npm run test
+
+# INSTALAR NO SERVIDOR
+- apt update
+- apt install libnss
+- apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
