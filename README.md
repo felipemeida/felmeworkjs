@@ -8,10 +8,10 @@
 - pm2 start server.config.js --env production
 
 ### Salvar as alterações
-- pm2 save -> salvar alterações
+- pm2 save
 
 ### Aparecer os logs
-- pm2 logs -> aparecer os logs
+- pm2 logs
 
 # PRINCIPAIS COMANDOS NPM
 
