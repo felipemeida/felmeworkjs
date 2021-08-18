@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: "server",
-      script: "./server.js serve",
-      watch: ["./"],
+      script: "../../../var/www/html/server.js",
+      watch: true,
       env_production: {
         NODE_ENV: "production"
       },
