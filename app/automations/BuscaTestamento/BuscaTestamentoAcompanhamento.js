@@ -1,5 +1,4 @@
 const BuscaTestamento = require("./BuscaTestamento");
-const {selectorToClipboard} = require("../../helpers/copyToClipboard");
 
 class BuscaTestamentoAcompanhamento extends BuscaTestamento {
 
@@ -14,8 +13,9 @@ class BuscaTestamentoAcompanhamento extends BuscaTestamento {
 
     async automation() {
         await this.login();
+        await this.page.waitForTimeout(this.time(1000));
         await this.page.type('#mat-input-0', this.id);
-        await this.page.waitForTimeout(this.time(100));
+        await this.page.waitForTimeout(this.time(200));
         let status = await this.page.$eval('.mat-row .cdk-column-status', (element) => {
             return element.innerHTML
         })
