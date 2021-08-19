@@ -16,7 +16,7 @@ module.exports = {
       script: "../../../var/www/html/cron/index.js",
       instances: 1,
       exec_mode: 'fork',
-      cron_restart: "0,30 * * * *",
+      cron_restart: "0,1 * * * *",
       watch: true,
       autorestart: false
     }
