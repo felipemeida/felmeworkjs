@@ -4,11 +4,12 @@ module.exports = {
       name: "server",
       script: "../../../var/www/html/server.js",
       watch: true,
-      // env_production: {
-      //   NODE_ENV: "production"
-      // },
+      instance_var: 'INSTANCE_ID',
+      env_production: {
+        NODE_ENV: "production"
+      },
       env_development: {
-        NODE_ENV: "development"
+        NODE_ENV: "test"
       }
     },
     {
