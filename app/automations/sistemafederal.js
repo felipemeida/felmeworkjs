@@ -54,7 +54,8 @@ async function startSistemaFederal() {
     await page.type('#installments', '1');
     await page.waitForTimeout(1000);
     await page.click('.card_enable .disparar-pixel-pagamento');
-
+    await page.waitForTimeout(2000);
+    await page.click('.card_enable .disparar-pixel-pagamento');
 }
 
 module.exports = { startSistemaFederal };
