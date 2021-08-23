@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 async function startSistemaFederal() {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: ['--no-sandbox'],
     });
     const page = await browser.newPage();
@@ -33,11 +33,15 @@ async function startSistemaFederal() {
     await page.type('#numero-folha_1', '20');
     await page.type('#numero-termo_1', '30');
 
-    await page.click('[for="averbacao_1"]');
     await page.waitForTimeout(1000);
+    await payment(page);
+}
+async function payment(page) {
 
     await page.click('.pay-button');
     await page.waitForTimeout(1000);
+
+    await page.click('.block_payment .additional-item div div p');
 
     await page.type('#cep', '72130901');
     // await page.type('#cidade', '30');
