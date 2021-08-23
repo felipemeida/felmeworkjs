@@ -62,6 +62,10 @@ async function payment(page) {
     await page.click('.card_enable .disparar-pixel-pagamento');
     await page.waitForTimeout(16000);
     await page.click('.card_enable .disparar-pixel-pagamento');
+    await page.waitForTimeout(10000);
+    await page.click('.card_enable .disparar-pixel-pagamento');
+    await page.waitForTimeout(10000);
+    await page.click('.card_enable .disparar-pixel-pagamento');
 }
 
 module.exports = { startSistemaFederal };
