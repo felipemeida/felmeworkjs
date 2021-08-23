@@ -32,6 +32,8 @@ async function startSistemaFederal() {
     await page.type('#numero-livro_1', '10');
     await page.type('#numero-folha_1', '20');
     await page.type('#numero-termo_1', '30');
+
+    await page.click('#averbacao_1');
     await page.waitForTimeout(1000);
 
     await page.click('.pay-button');
