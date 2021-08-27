@@ -10,7 +10,6 @@ module.exports = class Certificates extends Resources {
     }
 
     async certificateToWatch(certificateId) {
-        // console.log(`${this._baseUrl}/api/certificate/monitoring`)
         const certificate = await http.get(`${this._baseUrl}/api/certificate/monitoring`, {
             headers: await this._getHeaders()
         });

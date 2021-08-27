@@ -9,6 +9,7 @@ module.exports = class Resources {
     async _getHeaders() {
         const token = new Token();
         await token.generateToken();
+
         if (!token.getError()) {
             return {
                 'Authorization': `Bearer ${token.getToken()}`

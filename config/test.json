@@ -3,15 +3,29 @@
     "port": 3000
   },
   "backend": {
-    "baseUrl": "http://127.0.0.1:8000",
+    "baseUrl": "https://painel.sistemafederal.com.br",
     "user": "api@sistemafederal.com.br",
     "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
+  },
+  "db": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "dbname": "db_automation",
+    "user": "root",
+    "password": "fel12345",
+    "options": {
+      "logging": false
+    }
   },
   "storage": {
     "download": "/Users/felipemeida/downloads"
   },
   "performance": {
     "multiplierTime": 0.8,
-    "steps": 0
+    "steps": 4
+  },
+  "automation": {
+    "headless": false,
+    "args": ""
   }
 }

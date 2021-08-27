@@ -1,6 +1,8 @@
 const Certificates = require("../resources/certificate-system/Certificates");
 const BuscaTestamentoCertidao = require("../automations/BuscaTestamento/BuscaTestamentoCertidao");
 const BuscaTestamentoAcompanhamento = require("../automations/BuscaTestamento/BuscaTestamentoAcompanhamento");
+const Certificate = require("../models/Certificate");
+const {saveCertificate} = require("../services/certificate/saveCertificate");
 
 module.exports.fillTestamento = async function (req, res) {
     const certificates = new Certificates();
@@ -23,15 +25,28 @@ module.exports.getCertificate = async function (req, res) {
 }
 
 module.exports.monitoringCertificate = async function (req, res) {
-    const buscaTestamentoCertidao = new BuscaTestamentoAcompanhamento();
-    buscaTestamentoCertidao.setId('B05719291');
-    // const certificates = new Certificates();
-    // const certificatesToWatch = await certificates.certificateToWatch();
-    // console.log(certificatesToWatch);
-    await buscaTestamentoCertidao.start();
+
+    let certificate = await Certificate.findAll({
+        where: {
+            type: 'testamento',
+            monitoring: true
+        },
+        order: [
+            ['updatedAt', 'ASC']
+        ]
+    });
+
+    if (certificate.length > 0) {
+        const buscaTestamentoCertidao = new BuscaTestamentoAcompanhamento();
+        buscaTestamentoCertidao.setCertidao(certificate[0]);
+        await buscaTestamentoCertidao.start();
+    } else {
+        await saveCertificate();
+    }
+    res.send('done');
 }
 
-async function callAutomation(dataCertificate){
+async function callAutomation(dataCertificate) {
     const buscaTestamentoCertidao = new BuscaTestamentoCertidao();
     await buscaTestamentoCertidao.start(dataCertificate.data.datas);
 }

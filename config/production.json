@@ -7,11 +7,25 @@
     "user": "api@sistemafederal.com.br",
     "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
   },
+  "db": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "dbname": "db_automation",
+    "user": "root",
+    "password": "fel12345",
+    "options": {
+      "logging": false
+    }
+  },
   "storage": {
     "download": "/Users/felipemeida/downloads"
   },
   "performance": {
     "multiplierTime": 1,
     "steps": 10
+  },
+  "automation": {
+    "headless": true,
+    "args": "--no-sandbox"
   }
 }

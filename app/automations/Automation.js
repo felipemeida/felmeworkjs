@@ -13,9 +13,9 @@ module.exports = class Automation {
     async start(dataCertificate) {
         this.dataCertificate = dataCertificate;
         this.browser = await puppeteer.launch({
-            headless: true,
+            headless: config.get('automation.headless'),
             slowMo: config.get('performance.steps'),
-            args: ['--no-sandbox'],
+            args: [config.get('automation.args')],
         });
         this.page = await this.browser.newPage();
         await this.page.setViewport({ width: 1280, height: 700 })

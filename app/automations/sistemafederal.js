@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
+const config = require("config");
 
 async function startSistemaFederal() {
     const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox'],
+        headless: config.get('automation.headless'),
+        args: [config.get('automation.args')],
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 })
