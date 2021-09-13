@@ -29,11 +29,15 @@ module.exports = {
       },
       count: {
         type: Sequelize.INTEGER,
-        default: 0
+        defaultValue: 0
       },
-      money: {
+      remainingMoney: {
         type: Sequelize.FLOAT,
-        default: 0
+        defaultValue: 0
+      },
+      minimumMoney: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

@@ -1,5 +1,6 @@
 module.exports = {
   apps: [
+      // Instance server
     {
       name: "server",
       script: "../../../var/www/html/server.js",
@@ -13,11 +14,22 @@ module.exports = {
       }
     },
     {
+      // Fill Certificate on Sistema Federal every minute
       name: 'CRON',
-      script: "../../../var/www/html/cron/index.js",
+      script: "../../../var/www/html/cron/fillCertificateSistemaFederal.js.js",
       instances: 1,
       exec_mode: 'fork',
       cron_restart: "0-59/1 * * * *",
+      watch: true,
+      autorestart: false
+    },
+    {
+      // Verifica Saldo digitais das certidoes civis
+      name: 'CRON',
+      script: "../../../var/www/html/cron/verifyMoneyRemainingRegistroCivil.js",
+      instances: 1,
+      exec_mode: 'fork',
+      cron_restart: "* 0-59/1 * * *",
       watch: true,
       autorestart: false
     }

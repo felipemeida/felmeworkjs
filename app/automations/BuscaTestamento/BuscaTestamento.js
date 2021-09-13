@@ -1,10 +1,16 @@
 const Automation = require("../Automation");
+const {processCertificate} = require("../../helpers/certificateHelper");
 
 class BuscaTestamento extends Automation {
     constructor() {
         super();
         this.userName = '04773145110';
         this.password = '951753Pa11!';
+        this.certificate = '';
+    }
+
+    setCertificate(certificate) {
+        this.certificate = processCertificate(certificate);
     }
 
     async login() {

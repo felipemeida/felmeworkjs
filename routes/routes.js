@@ -6,15 +6,18 @@ const testamentoAutomationController = require("../app/controllers/testamentoAut
 const testsController = require("../app/controllers/testsController");
 const civilAutomationController = require("../app/controllers/civilAutomationController");
 
+// PREENCHER CERTIDÃO CARTÓRIO
 router.use('/certificate-system', sistemaFederalAutomationController.fillCertificate);
+
+// CERTIDÕES DE TESTAMENTO
 router.use('/testamento/:id', testamentoAutomationController.fillTestamento);
 router.use('/testamento', testamentoAutomationController.fillTestamentoGet);
-router.use('/acompanhamento/:id', testamentoAutomationController.monitoringCertificate);
-router.use('/certificate', testamentoAutomationController.getCertificate);
+router.use('/testamento/acompanhamento/:id', testamentoAutomationController.monitoringCertificate);
 
+// CERTIDÕES CIVIS
 router.use('/civil/nascimento/:id', civilAutomationController.fillCertificateNascimento);
-router.use('/civil/nascimento', civilAutomationController.fillCertificateNascimento);
 
+// OUTROS
 router.use('/testes', testsController.test);
 router.use('/form', testsController.form);
 router.use('/login-gmail', testsController.gmail);

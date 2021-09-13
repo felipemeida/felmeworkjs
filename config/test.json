@@ -3,7 +3,7 @@
     "port": 3000
   },
   "backend": {
-    "baseUrl": "https://painel.sistemafederal.com.br",
+    "baseUrl": "https://testepainel.cartoriofederal.com",
     "user": "api@sistemafederal.com.br",
     "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
   },
@@ -12,10 +12,18 @@
     "host": "localhost",
     "dbname": "db_automation",
     "user": "root",
-    "password": "fel12345",
+    "password": "root12345",
     "options": {
       "logging": false
     }
+  },
+  "email": {
+    "host": "smtp.umbler.com",
+    "user": "atendimento@sistemafederal.com.br",
+    "from": "atendimento@sistemafederal.com.br",
+    "password": "951753pa!",
+    "port": 587,
+    "secure": false
   },
   "storage": {
     "download": "/Users/felipemeida/downloads"

@@ -2,7 +2,7 @@
   "name": "crawler",
   "version": "1.0.0",
   "description": "",
-  "main": "examples/index.js",
+  "main": "server.js",
   "scripts": {
     "server": "export NODE_ENV=test; nodemon server.js",
     "server-prod": "export NODE_ENV=production; nodemon server.js",
@@ -21,6 +21,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mysql2": "^2.3.0",
+    "nodemailer": "^6.6.3",
     "puppeteer": "^10.1.0",
     "sequelize": "^6.6.5"
   },

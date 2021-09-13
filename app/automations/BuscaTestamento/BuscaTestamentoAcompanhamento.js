@@ -1,4 +1,5 @@
 const BuscaTestamento = require("./BuscaTestamento");
+const {processCertificate} = require("../../helpers/certificateHelper");
 
 class BuscaTestamentoAcompanhamento extends BuscaTestamento {
 
@@ -8,7 +9,7 @@ class BuscaTestamentoAcompanhamento extends BuscaTestamento {
     }
 
     setCertidao(certidao) {
-        this.certidao = certidao;
+        this.certidao =  processCertificate(certidao);
     }
 
     async automation() {

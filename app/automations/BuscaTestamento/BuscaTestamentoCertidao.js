@@ -1,5 +1,4 @@
 const {ufToOrderNumber} = require("../../helpers/ufHelper");
-const {findBySlug} = require("../../helpers/certificateHelper");
 const {uploadPath, eraseUploadFolder, filesInUploadFolder} = require("../../helpers/storage");
 const {selectorToClipboard} = require("../../helpers/copyToClipboard");
 const BuscaTestamento = require("./BuscaTestamento");
@@ -14,13 +13,13 @@ class Testamento extends BuscaTestamento{
     async firstStage() {
         // field data óbito
         await this.page.waitForSelector('#mat-input-8');
-        await this.page.type('#mat-input-8', this.form.data_obito);
+        await this.page.type('#mat-input-8', this.form.data_obito.value);
         await this.page.click('#mat-select-0');
         await this.page.waitForTimeout(this.time(200));
         await this.page.waitForSelector('.mat-option-text');
 
         const regions = await this.page.$$('.mat-option-text');
-        await regions[ufToOrderNumber(this.form.uf)].click();
+        await regions[ufToOrderNumber(this.form.estado_obito.value)].click();
         await this.nextStageOnForm(1)
         await this.page.click('button[mat-dialog-close]');
         await this.page.waitForTimeout(this.time(300));
@@ -28,19 +27,20 @@ class Testamento extends BuscaTestamento{
 
     async secondStage() {
         await this.page.waitForSelector('#mat-input-0');
-        await this.page.type('#mat-input-0', this.form.nome_falecido);
-        await this.page.type('#mat-input-1', this.form.data_nascimento);
-        await this.page.type('#mat-input-2', this.form.registro_geral);
-        await this.page.type('#mat-input-3', this.form.orgao_emissor);
-        await this.page.type('#mat-input-4', this.form.cpf_falecido);
-        await this.page.type('#mat-input-5', this.form.nome_mae);
-        await this.page.type('#mat-input-6', this.form.nome_pai);
+        console.log(this.form);
+        await this.page.type('#mat-input-0', this.form.nome_falecido.value);
+        await this.page.type('#mat-input-1', this.form.data_nascimento.value);
+        await this.page.type('#mat-input-2', this.form.registro_geral.value);
+        await this.page.type('#mat-input-3', this.form.orgao_emissor.value);
+        await this.page.type('#mat-input-4', this.form.cpf_falecido.value);
+        await this.page.type('#mat-input-5', this.form.nome_mae.value);
+        await this.page.type('#mat-input-6', this.form.nome_pai.value);
         await this.nextStageOnForm(2);
     }
 
     async thirdStage() {
         await this.page.waitForSelector('#mat-input-9');
-        await this.page.type('#mat-input-9', this.form.matricula_obito);
+        await this.page.type('#mat-input-9', this.form.matricula_obito.value);
         await this.page.click('button[class="col-md-2 mat-flat-button mat-primary"]');
         const elementsHandle = await this.page.$$("input[type=file]");
         await elementsHandle[0].uploadFile(uploadPath(this.form.link_certidao));
@@ -80,25 +80,9 @@ class Testamento extends BuscaTestamento{
         await this.page.click('[class="mat-flat-button mat-primary ng-star-inserted"]');
     }
 
-    async fillCertificate(){
-        // await this.page.goto('http://localhost:3000/form');
-        // await this.page.click('#download');
-
-        //await this.page.goto('http://www.risel.com.br/politicaprivacidade/v1.pdf');
-        // await this.page.click('iron-icon');
-        //await this.page.goto('http://www.risel.com.br');
-        // {waitUntil: 'networkidle0'}
-        // await this.page.waitForTimeout(this.time(5000));
-        // const pdf = await this.page.pdf({ format: 'A4'});
-        // console.log(pdf);
-        // fs.writeFileSync('some.pdf', pdf)
-
-        //await this.page.screenshot({path: 'example.png'});
-    }
-
     async automation(){
 
-        await this.processDataTestamento(this.dataCertificate);
+        await this.processDataTestamento();
         await this.login();
 
         // await this.page.goto('https://buscatestamento.org.br/private/orders/new');
@@ -119,22 +103,12 @@ class Testamento extends BuscaTestamento{
         await this.paymentStage();
     }
 
-    async processDataTestamento(dataCertificate) {
-        this.form.nome_falecido  = findBySlug(dataCertificate, 'nome-falecido');
-        this.form.data_obito  = findBySlug(dataCertificate, 'data-obito');
-        this.form.nome_mae  = findBySlug(dataCertificate, 'nome-mae');
-        this.form.nome_pai  = findBySlug(dataCertificate, 'nome-pai');
-        this.form.registro_geral  = findBySlug(dataCertificate, 'registro-geral');
-        this.form.orgao_emissor  = findBySlug(dataCertificate, 'orgao-emissor');
-        this.form.cpf_falecido  = findBySlug(dataCertificate, 'cpf-falecido');
-        this.form.uf  = findBySlug(dataCertificate, 'estado-obito');
-        this.form.matricula_obito  = findBySlug(dataCertificate, 'matricula-obito');
-        this.form.data_nascimento  = findBySlug(dataCertificate, 'data-nascimento');
-
+    async processDataTestamento() {
         //need get in backend
         const files = await filesInUploadFolder();
-        this.form.link_certidao  = files[0];
-        this.form.link_documento  = files[1];
+        this.form = this.certificate;
+        this.form.link_certidao = files[0];
+        this.form.link_documento = files[1];
     }
 }
 module.exports = Testamento;

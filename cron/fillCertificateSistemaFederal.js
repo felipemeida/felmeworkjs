@@ -1,6 +1,5 @@
 const {startSistemaFederal} = require("../app/automations/sistemafederal");
 
-async function test() {
+(async function() {
     await startSistemaFederal();
-}
-test();
+}());
