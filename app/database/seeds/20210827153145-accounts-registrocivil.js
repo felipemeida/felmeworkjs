@@ -47,8 +47,8 @@ module.exports = {
           { name: 'CARLOS JURISTA', user: 'Castrojurista798@gmail.com', email: 'Castrojurista798@gmail.com', password: '951753pA12.', type: 'eletronica-registrocivil', createdAt: new Date(), updatedAt: new Date() },
           { name: 'GILMAR ORAGO', user: 'oragoCosta98@gmail.com', email: 'oragoCosta98@gmail.com', password: '951753pA11@', type: 'eletronica-registrocivil', createdAt: new Date(), updatedAt: new Date() },
           { name: 'CATARINA ADVOCACIA', user: 'Catarinadvocaciasp11@gmail.com', email: 'Catarinadvocaciasp11@gmail.com', password: '951753Pa11?', type: 'eletronica-registrocivil', createdAt: new Date(), updatedAt: new Date() },
-          { name: 'JURIDICO FEDERAL', user: 'juridicofederal2@gmail.com', email: 'juridicofederal2@gmail.com', password: '10203040Pa!', type: 'papel-registrocivil', createdAt: new Date(), updatedAt: new Date() },
-          { name: 'JUS FEDERAL', user: 'jusfederal1@gmail.com', email: 'jusfederal1@gmail.com', password: 'AP951753pa11!', type: 'papel-registrocivil', createdAt: new Date(), updatedAt: new Date() }
+          // { name: 'JURIDICO FEDERAL', user: 'juridicofederal2@gmail.com', email: 'juridicofederal2@gmail.com', password: '10203040Pa!', type: 'papel-registrocivil', createdAt: new Date(), updatedAt: new Date() },
+          // { name: 'JUS FEDERAL', user: 'jusfederal1@gmail.com', email: 'jusfederal1@gmail.com', password: 'AP951753pa11!', type: 'papel-registrocivil', createdAt: new Date(), updatedAt: new Date() }
         ]);
     },
 

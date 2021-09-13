@@ -6,10 +6,10 @@ class CertidaoNascimento extends CertidaoCivil {
         await this.login();
         await this.page.goto('https://www.registrocivil.org.br/birth-certificate');
         await this.page.waitForSelector('.multiselect');
-        await this.page.waitForTimeout(this.time(100));
+        await this.page.waitForTimeout(this.time(200));
         await this.page.click('.multiselect');
         await this.page.waitForSelector('.multiselect__option');
-        await this.page.waitForTimeout(this.time(100));
+        await this.page.waitForTimeout(this.time(200));
 
         const regions = await this.page.$$('.multiselect__element');
         await regions[ufToOrderNumber(this.certidao.uf.value)].click();
@@ -32,12 +32,16 @@ class CertidaoNascimento extends CertidaoCivil {
 
         await this.nextStage();
 
+        // verificar o tipo da certidão
+
+        //console.log(this.certidao);
+
         await this.page.click('#digitalCopy');
 
         await this.nextStage();
         await this.page.waitForSelector('label.custom-control-label');
         await this.page.click('label.custom-control-label');
-        await this.page.waitForTimeout(this.time(100));
+        await this.page.waitForTimeout(this.time(200));
         await this.nextStage();
         await this.nextStage();
         await this.nextStage();
