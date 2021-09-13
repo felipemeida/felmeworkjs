@@ -25,7 +25,7 @@
     "steps": 10
   },
   "automation": {
-    "headless": true,
-    "args": "--no-sandbox"
+    "headless": false,
+    "args": ""
   }
 }
