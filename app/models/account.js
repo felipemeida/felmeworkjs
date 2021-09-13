@@ -26,7 +26,10 @@ Account.init({
     count: {
         type: DataTypes.INTEGER
     },
-    money: {
+    remainingMoney: {
+        type: DataTypes.FLOAT
+    },
+    minimumMoney: {
         type: DataTypes.FLOAT
     }
 }, {

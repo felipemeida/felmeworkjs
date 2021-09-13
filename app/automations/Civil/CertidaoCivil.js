@@ -18,7 +18,7 @@ x
 
     async nextStage() {
         await this.page.click('button.btn-info');
-        await this.page.waitForTimeout(this.time(200));
+        await this.page.waitForTimeout(this.time(300));
     }
 
     async login() {

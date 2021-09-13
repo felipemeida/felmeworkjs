@@ -24,12 +24,12 @@ module.exports = {
       autorestart: false
     },
     {
-      // Verifica Saldo digitais das certidoes civis
+      // Verifica Saldo digitais das certidoes civis de uma conta a cada 30 minutos
       name: 'CRON',
       script: "../../../var/www/html/cron/verifyMoneyRemainingRegistroCivil.js",
       instances: 1,
       exec_mode: 'fork',
-      cron_restart: "* 0-59/1 * * *",
+      cron_restart: "*/30 * * * *",
       watch: true,
       autorestart: false
     }

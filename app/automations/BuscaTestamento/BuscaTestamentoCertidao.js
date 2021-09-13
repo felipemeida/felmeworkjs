@@ -27,7 +27,6 @@ class Testamento extends BuscaTestamento{
 
     async secondStage() {
         await this.page.waitForSelector('#mat-input-0');
-        console.log(this.form);
         await this.page.type('#mat-input-0', this.form.nome_falecido.value);
         await this.page.type('#mat-input-1', this.form.data_nascimento.value);
         await this.page.type('#mat-input-2', this.form.registro_geral.value);
