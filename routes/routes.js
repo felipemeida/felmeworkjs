@@ -2,20 +2,13 @@ const router = require('express').Router();
 
 const homeController = require("../app/controllers/homeController");
 const sistemaFederalAutomationController = require("../app/controllers/sistemaFederalAutomationsController");
-const testamentoAutomationController = require("../app/controllers/testamentoAutomationController");
 const testsController = require("../app/controllers/testsController");
-const civilAutomationController = require("../app/controllers/civilAutomationController");
+const certificateController = require("../app/controllers/certificateController");
 
 // PREENCHER CERTIDÃO CARTÓRIO
-router.use('/certificate-system', sistemaFederalAutomationController.fillCertificate);
+router.use('/sistema-federal/nascimento', sistemaFederalAutomationController.fillCertificate);
 
-// CERTIDÕES DE TESTAMENTO
-router.use('/testamento/:id', testamentoAutomationController.fillTestamento);
-router.use('/testamento', testamentoAutomationController.fillTestamentoGet);
-router.use('/testamento/acompanhamento/:id', testamentoAutomationController.monitoringCertificate);
-
-// CERTIDÕES CIVIS
-router.use('/civil/nascimento/:id', civilAutomationController.fillCertificateNascimento);
+router.use('/certificate/:id', certificateController.fillCertificate);
 
 // OUTROS
 router.use('/testes', testsController.test);

@@ -1,21 +1,11 @@
 const CertidaoCivil = require("./CertidaoCivil");
-const {ufToOrderNumber} = require("../../helpers/ufHelper");
 
 class CertidaoNascimento extends CertidaoCivil {
     async automation(){
         await this.login();
         await this.page.goto('https://www.registrocivil.org.br/birth-certificate');
-        await this.page.waitForSelector('.multiselect');
-        await this.page.waitForTimeout(this.time(200));
-        await this.page.click('.multiselect');
-        await this.page.waitForSelector('.multiselect__option');
-        await this.page.waitForTimeout(this.time(200));
 
-        const regions = await this.page.$$('.multiselect__element');
-        await regions[ufToOrderNumber(this.certidao.uf.value)].click();
-
-        await this.page.waitForSelector('[name="completeName"]', {timeout: 300000});
-        await this.page.waitForTimeout(this.time(300));
+        await this.ufSelect();
 
         await this.page.type('[name="completeName"]', this.certidao.nome_certidao.value);
         // await this.page.type('[name="cpf"]', '');
@@ -31,20 +21,10 @@ class CertidaoNascimento extends CertidaoCivil {
         await this.page.click('[name="bookNumber"]');
 
         await this.nextStage();
-
-        // verificar o tipo da certidão
-
-        //console.log(this.certidao);
-
-        await this.page.click('#digitalCopy');
-
+        await this.format();
         await this.nextStage();
-        await this.page.waitForSelector('label.custom-control-label');
-        await this.page.click('label.custom-control-label');
-        await this.page.waitForTimeout(this.time(200));
-        await this.nextStage();
-        await this.nextStage();
-        await this.nextStage();
+
+        await this.end();
     }
 }
 

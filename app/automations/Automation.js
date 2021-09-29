@@ -4,14 +4,14 @@ const config = require("config");
 module.exports = class Automation {
     constructor() {
         this.browser = '';
-        this.dataCertificate = {};
         this.page = '';
         this.form = {};
         this.multiplierTime = config.get('performance.multiplierTime')
     }
 
-    async start(dataCertificate) {
-        this.dataCertificate = dataCertificate;
+
+
+    async start() {
         this.browser = await puppeteer.launch({
             headless: config.get('automation.headless'),
             slowMo: config.get('performance.steps'),

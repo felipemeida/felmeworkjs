@@ -5,15 +5,15 @@ const BuscaTestamento = require("./BuscaTestamento");
 
 class Testamento extends BuscaTestamento{
     async nextStageOnForm(count){
-        const regions = await this.page.$$('.align-items-center [class="mr-3 mat-flat-button mat-primary"]');
+        const regions = await this.page.$$('[class="mr-3 mat-flat-button mat-primary"]');
         await regions[count - 1].click();
         await this.page.waitForTimeout(this.time(500));
     }
 
     async firstStage() {
         // field data óbito
-        await this.page.waitForSelector('#mat-input-8');
-        await this.page.type('#mat-input-8', this.form.data_obito.value);
+        await this.page.waitForSelector('#mat-input-9');
+        await this.page.type('#mat-input-9', this.form.data_obito.value);
         await this.page.click('#mat-select-0');
         await this.page.waitForTimeout(this.time(200));
         await this.page.waitForSelector('.mat-option-text');
@@ -39,14 +39,27 @@ class Testamento extends BuscaTestamento{
 
     async thirdStage() {
         await this.page.waitForSelector('#mat-input-9');
-        await this.page.type('#mat-input-9', this.form.matricula_obito.value);
+        await this.page.type('#mat-input-10', this.form.matricula_obito.value);
         await this.page.click('button[class="col-md-2 mat-flat-button mat-primary"]');
+
+        // file 1
         const elementsHandle = await this.page.$$("input[type=file]");
         await elementsHandle[0].uploadFile(uploadPath(this.form.link_certidao));
         await this.page.waitForTimeout(this.time(3500));
+        await this.page.click('#mat-select-3');
+        await this.page.waitForTimeout(this.time(50));
+        await this.page.click('#mat-option-35');
         await this.nextStageOnForm(3);
+
+        await this.page.click('[class="mr-3 mat-flat-button mat-primary ng-star-inserted"]');
+        await this.page.waitForTimeout(this.time(200));
+
+        // file 2
         await elementsHandle[1].uploadFile(uploadPath(this.form.link_documento));
         await this.page.waitForTimeout(this.time(3500));
+        await this.page.click('#mat-select-4');
+        await this.page.waitForTimeout(this.time(50));
+        await this.page.click('#mat-option-42');
         await this.nextStageOnForm(4);
     }
 
@@ -59,7 +72,7 @@ class Testamento extends BuscaTestamento{
         await this.page.waitForTimeout(this.time(600));
         await this.page.waitForSelector('#mat-checkbox-5-input');
         await this.page.click('[for="mat-checkbox-5-input"]');
-        await this.page.type('#mat-input-15', 'SISTEMA FEDERAL');
+        await this.page.type('#mat-input-16', 'SISTEMA FEDERAL');
         await this.page.click('button[class="mat-flat-button mat-primary"]');
     }
 

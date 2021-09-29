@@ -9,7 +9,7 @@ class BuscaTestamento extends Automation {
         this.certificate = '';
     }
 
-    setCertificate(certificate) {
+    setCertidao(certificate) {
         this.certificate = processCertificate(certificate);
     }
 

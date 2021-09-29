@@ -1,4 +1,4 @@
-const db = require("../app/adapters/db");
+const db = require("../app/database/db");
 test('DB connection', async () => {
     try {
         await db.authenticate();
