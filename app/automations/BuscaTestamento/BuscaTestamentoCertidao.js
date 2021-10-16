@@ -69,7 +69,7 @@ class Testamento extends BuscaTestamento{
         await this.nextStageOnForm(5);
         //await this.nextStageOnForm(6);
         await this.page.click('[class="d-flex justify-content-center align-items-center mt-4 ng-star-inserted"] [class="mat-flat-button mat-primary"]');
-        await this.page.waitForTimeout(this.time(600));
+        await this.page.waitForTimeout(this.time(700));
         await this.page.waitForSelector('#mat-checkbox-5-input');
         await this.page.click('[for="mat-checkbox-5-input"]');
         await this.page.type('#mat-input-16', 'SISTEMA FEDERAL');
