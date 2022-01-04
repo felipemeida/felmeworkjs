@@ -2,15 +2,10 @@
   "server": {
     "port": 3000
   },
-  "backend": {
-    "baseUrl": "https://testepainel.cartoriofederal.com",
-    "user": "api@sistemafederal.com.br",
-    "password": "qtxciEFb^*okT!E^pkUc&wwgk^fBP*40WHcSP4C^RkCK"
-  },
   "db": {
     "dialect": "mysql",
     "host": "localhost",
-    "dbname": "db_automation",
+    "dbname": "db",
     "user": "root",
     "password": "root12345",
     "options": {
@@ -18,22 +13,11 @@
     }
   },
   "email": {
-    "host": "smtp.umbler.com",
-    "user": "atendimento@sistemafederal.com.br",
-    "from": "atendimento@sistemafederal.com.br",
-    "password": "951753pa!",
+    "host": "host",
+    "user": "email@email.com",
+    "from": "email@email.com",
+    "password": "password",
     "port": 587,
     "secure": false
-  },
-  "storage": {
-    "download": "/Users/felipemeida/downloads"
-  },
-  "performance": {
-    "multiplierTime": 1.5,
-    "steps": 4
-  },
-  "automation": {
-    "headless": false,
-    "args": ""
   }
 }

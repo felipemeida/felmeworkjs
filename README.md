@@ -1,30 +1,10 @@
-# PRINCIPAIS COMANDOS PM2 SERVIDOR
+# Padrão MVC ###
 
-### Remover as configs antigas
-- pm2 delete all
+###Routes
+routes/routes.js
 
-### Escolher o modo da aplicação
-- pm2 start server.config.js --env development
-- pm2 start server.config.js --env production
+###Controller
+app/controllers
 
-### Salvar as alterações
-- pm2 save
-
-### Aparecer os logs
-- pm2 logs
-
-# PRINCIPAIS COMANDOS NPM
-
-### Rodar no modo de teste
-- npm run server
-
-### Rodar no modo produção
-- npm run server-prod
-
-### Rodar os testes
-- npm run test
-
-# INSTALAR NO SERVIDOR
-- apt update
-- apt install libnss
-- apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
+###View
+views

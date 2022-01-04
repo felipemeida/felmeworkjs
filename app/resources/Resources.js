@@ -1,5 +1,5 @@
 const config = require('config');
-const Token = require("./certificate-system/token/Token");
+// const Token = require("./example/token/Token");
 
 module.exports = class Resources {
     constructor() {
